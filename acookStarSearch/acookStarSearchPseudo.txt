@@ -1,0 +1,47 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+void getJudgeData(float &, unsigned int numberOfDecimalsToKeep);
+void calcScore(float, float, float, float, float);
+
+float findLowest(float);
+float findHighest(float);
+
+int main()
+{
+	float judgeScore;
+	
+    return 0;
+}
+
+void getJudgeData(float &judgeScore, unsigned int numberOfDecimalsToKeep = 1) {
+	cout << "Enter the judge's score as a floating point number (eg. 9.3): \n";
+	cin >> judgeScore;
+	
+	while (judgeScore < 0 || judgeScore > 10 ) {
+		cout << ""
+			<< "Enter the judge's score as a floating point number (eg. 9.3): \n";
+		cin >> judgeScore;
+	}
+	
+	judgeScore = roundf(judgeScore * powf(10, numberOfDecimalsToKeep)) / powf(10, numberOfDecimalsToKeep);
+	
+	return 0;
+}
+
+void calcScore(float, float, float, float, float) {
+	
+	return 0;
+}
+
+float findLowest(float) {
+	
+	return 0;
+}
+
+float findHighest(float) {
+
+	return 0;
+}

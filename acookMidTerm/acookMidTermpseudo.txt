@@ -1,0 +1,19 @@
+/* pseudocode
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+int main(){
+	ofstream outputMonthFile;
+	
+	get user input for month
+	validate the month number
+	switch statement output to file for month name
+	output header for month file
+	calculate the starting day of the month /* this is based on the fact that 01/01/2015 was a Thursday, the actual start day of the given month is found by calculating each given start day of the different months in a function, and selecting the given month based on the user input in an if statement that calls the function at the month number*/
+	
+	print to the file the correct month calendar
+	
+}
+pseudocode */

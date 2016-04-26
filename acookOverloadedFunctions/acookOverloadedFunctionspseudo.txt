@@ -1,0 +1,30 @@
+#include <iostream>
+
+using namespace std;
+
+float getPatientCharge(int, float, float, float); // days spent in hospital, daily rate, medication charges, service charges
+double getPatientCharge(double, double); // service charges, medication charges
+
+int main()
+{
+    int patientType;
+	cout << "Enter the number 1 if the patient is an inpatient, enter 2 for outpatient: \n";
+    cin >>  patientType;
+
+    while (patientType != 1 && patientType != 2) {
+        cout << "Enter the number 1 if the patient is an inpatient, enter 2 for outpatient: \n";
+        cin >>  patientType;
+    }
+
+	return 0;
+}
+
+float getPatientCharge() {
+
+    return 0;
+}
+
+double getPatientCharge() {
+
+    return 0;
+}

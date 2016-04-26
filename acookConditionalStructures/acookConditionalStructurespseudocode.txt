@@ -1,0 +1,48 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+int main()
+{
+    // declaring variables
+    char userPlan;
+    int minutesUsed;
+    float totalOwed;
+
+    // program
+    cout << "What phone service package have you selected?" << endl
+         << "Package A: For $39.99 per month 450 minutes are provided. Additional minutes are $0.45 per minute." << endl
+         << "Package B: For $59.99 per month 900 minutes are provided. Additional minutes are $0.40 per minute." << endl
+         << "Package C: For $69.99 per month unlimited minutes provided." << endl;
+    cin >> userPlan;
+
+    // input validation of userPlan
+    if ((userPlan != 'a') && (userPlan != 'b') && (userPlan != 'c') && (userPlan != 'A') && (userPlan != 'B') && (userPlan != 'C')){
+        cout << "You did not enter a valid plan letter!" << endl;
+    }
+
+    if (userPlan == 'a' || userPlan == 'A' || userPlan == 'b' || userPlan == 'B') {
+    cout << "How many minutes were used in the month?";
+    cin >> minutesUsed;
+    }
+
+	// input validation of minutesUsed
+	
+	
+    if (userPlan == 'a' || userPlan == 'A') {
+	totalOwed = 39.99;
+		if(minutesUsed > 450) { totalOwed = totalOwed + ((minutesUsed - 450) * .45); }
+    }
+
+    else if (userPlan == 'b' || userPlan == 'B') {
+	totalOwed = 59.99;
+		if (minutesUsed > 900) { totalOwed = totalOwed + ((minutesUsed - 900) * .40); }
+    }
+
+    else if (userPlan == 'c' || userPlan == 'C') {
+	totalOwed = 69.99;
+    }
+
+    cout << "The total owed for this month's bill is: $" << setprecision(2) << fixed << left << totalOwed;
+}

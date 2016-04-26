@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1457030386 source:c:\users\alexander\code\college\prg110\acookcelsius\main.cpp
+	<iostream>
+	<iomanip>
+

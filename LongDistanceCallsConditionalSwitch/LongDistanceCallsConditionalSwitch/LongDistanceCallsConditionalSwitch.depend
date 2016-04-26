@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1456024629 source:c:\users\alexander\code\college\prg110\longdistancecallsconditionalswitch\longdistancecallsconditionalswitch\main.cpp
+	<iostream>
+	<iomanip>
+

@@ -1,0 +1,32 @@
+#include <iostream>
+
+using namespace std;
+
+int main ()
+{
+	// declaring variables
+	int hotelFloors;
+	int hotelRoomsOnFloor;
+	int hotelRoomsTotal;
+	int hotelRoomsOnFloorOccupied;
+	int hotelRoomsOccupiedTotal;
+	int hotelRoomsUnoccupiedTotal;
+
+	cout << "how many floors does the hotel have?";
+	cin >> hotelFloors;
+	// input validation of hotelFloors
+	if (hotelFloors < 1) { cout << "You did not enter a valid number of floors!" << endl; return 0; }
+
+	for (int i = 0; i != hotelFloors; hotelFloors --) {
+		if (hotelFloors != 13) {
+		cout << "how many rooms are on floor #" << hotelFloors << " ? Enter a number greater than 10." << endl;
+		cin >> hotelRoomsOnFloor;
+		// input validation of hotelRoomsOnFloor
+			if (hotelRoomsOnFloor < 10) { cout << "You did not enter a valid number of rooms on the floor!" << endl; return 0; }
+		cout << "how many rooms on floor #" << hotelFloors << " are currently occupied?" << endl;
+		cin >> hotelRoomsOnFloorOccupied;
+		// input validation of hotelRoomsOccupied
+            if (hotelRoomsOnFloor < hotelRoomsOnFloorOccupied ) { cout << "You entered more occupied rooms then there are on the floor!" << endl; return 0; }
+		}
+	}
+}

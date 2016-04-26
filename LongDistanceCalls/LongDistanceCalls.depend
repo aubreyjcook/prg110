@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1454804051 source:c:\users\alexander\desktop\coding\college\prg110\longdistancecalls\main.cpp
+	<iostream>
+
+1454807545 source:c:\users\alexander\code\college\prg110\longdistancecalls\main.cpp
+	<iostream>
+	<iomanip>
+
