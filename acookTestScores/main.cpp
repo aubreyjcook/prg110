@@ -46,6 +46,11 @@ int main()
         *testScores++;
     }
 
+    for (int i = 0; i < studentRosterNumber; i++)
+    {
+        cout << testScores[i] << " " << studentNames[i] << " ";
+    }
+
     //ending program
     delete [] testScores;
     delete [] studentNames;
