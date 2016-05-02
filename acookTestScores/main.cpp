@@ -1,9 +1,10 @@
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
 void sortArray(float arrayScores[], string arrayNames[], int size);
-float calculateAverageScore(int);
+float calculateAverageScore(float arrayScores[], int numberOfStudents);
 
 int main()
 {
@@ -42,12 +43,12 @@ int main()
     for (int i = 0; i < studentRosterNumber; i++)
     {
         cout << "Enter the student's Name: \n";
-        cin >> studentNames[i];
+        cin >> *(studentNames + i);
 
         cout << "Enter the student's score: \n";
         cin >> holdTestScore;
         while(holdTestScore < 1 || holdTestScore > maxTestScore) { cout << "Error: You entered a score less than 1 or greater than " << maxTestScore << "\nEnter the student's score: \n"; cin >> holdTestScore; }
-        testScores[i] = holdTestScore;
+        *(testScores + i) = holdTestScore;
     }
 
     //sorting algorithm
@@ -56,8 +57,9 @@ int main()
     //display
     for (int i = 0; i < studentRosterNumber; i++)
     {
-        cout << *(testScores + i) << " " << *(studentNames + i) << " ";
+        cout << "|Student Name: " << *(studentNames + i) << "|Score: " << *(testScores + i) << "|Percentile: " << (*(testScores + i) * (maxTestScore / 100)) << "%|\n";
     }
+    cout<< "Class Average: " << calculateAverageScore(testScores, studentRosterNumber);
 
     //ending program
     delete [] testScores;
@@ -87,14 +89,17 @@ void sortArray(float numbersToSort[], string namesToSort[], int arraySize)
     } while (swap);
 }
 
-float calculateAverageScore(float scoreArray[])
+float calculateAverageScore(float scoreArray[], int arrayMax)
 {
     float total = 0;
+    float average;
 
     for(int i = 0; i < arrayMax; i++)
     {
         total += scoreArray[i];
     }
 
-    return total;
+    average = total / arrayMax;
+
+    return average;
 }
