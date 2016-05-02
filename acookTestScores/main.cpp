@@ -2,18 +2,19 @@
 
 using namespace std;
 
-void sortArray(int array[], int size);
+void sortArray(float arrayScores[], string arrayNames[], int size);
+float calculateAverageScore(int);
 
 int main()
 {
     //creating pointers for dynamic array
-    int *testScores;
+    float *testScores;
     string *studentNames;
 
     //declaring variables
-    int maxTestScore;
+    float maxTestScore;
     int studentRosterNumber;
-    int holdTestScore;
+    float holdTestScore;
 
     //asking for number of students in the class
     cout << "How many students were in the class?\n";
@@ -25,9 +26,10 @@ int main()
     }
 
     //generating an array based on user input for the number of students
-    testScores = new int[studentRosterNumber];
+    testScores = new float[studentRosterNumber];
     studentNames = new string[studentRosterNumber];
 
+    //getting more information about the test scores
     cout << "What is the maximum test score?\n";
     cin >> maxTestScore;
     while (maxTestScore < 1 || maxTestScore > 1000)
@@ -36,6 +38,7 @@ int main()
         cin >> maxTestScore;
     }
 
+    //filling the array with student names and scores
     for (int i = 0; i < studentRosterNumber; i++)
     {
         cout << "Enter the student's Name: \n";
@@ -48,7 +51,7 @@ int main()
     }
 
     //sorting algorithm
-    sortArray(testScores, studentRosterNumber);
+    sortArray(testScores, studentNames, studentRosterNumber);
 
     //display
     for (int i = 0; i < studentRosterNumber; i++)
@@ -64,20 +67,34 @@ int main()
     return 0;
 }
 
-void sortArray(int numbersToSort[], int arraySize){ // the bubble sort does not sort these names correctly
+void sortArray(float numbersToSort[], string namesToSort[], int arraySize)
+{ //bubble sort for descending order of parallel arrays
 
     bool swap;
-    int temp;
+    float temp;
+    string temp2;
 
     do {
         swap = false;
         for (int i = 0; i < (arraySize - 1); i++) {
             if (numbersToSort[i] < numbersToSort[i + 1]){
-                temp = numbersToSort[i];
-                numbersToSort[i] = numbersToSort[i + 1];
-                numbersToSort[i + 1] = temp;
+                temp = numbersToSort[i]; temp2 = namesToSort[i];
+                numbersToSort[i] = numbersToSort[i + 1]; namesToSort[i] = namesToSort[i + 1];
+                numbersToSort[i + 1] = temp; namesToSort[i + 1] = temp2;
                 swap = true;
             }
         }
     } while (swap);
+}
+
+float calculateAverageScore(float scoreArray[])
+{
+    float total = 0;
+
+    for(int i = 0; i < arrayMax; i++)
+    {
+        total += scoreArray[i];
+    }
+
+    return total;
 }
