@@ -15,7 +15,7 @@ void clearList       (string firstNames[], string lastNames[], string phoneNumbe
 
 int arraySize = 0;
 //global variable containing the number of array elements that have been assigned, it increments every time the add member function is run and resets when the clear option is selected
-const int ARRAYMAX = 10;
+const int ARRAYMAX = 30;
 
 int main()
 {
@@ -96,69 +96,71 @@ void addMembers(string firstNames[], string lastNames[], string phoneNumbers[], 
 {
     //a counter for each time the array is increased in size by one
     arraySize++;
-
-    //variables needed to add data to the array
-    string newMemberFirstName;
-    string newMemberLastName;
-    string newMemberPhoneNumber;
-    int newMemberAge;
-
-    //getting the variables
-    cout << "Enter the Member's First name: \n";
-    cin  >> newMemberFirstName;
-    cout << "Enter the Member's Last name: \n";
-    cin  >> newMemberLastName;
-    cout << "Enter the Member's phone number as a single string of numbers, eg(8154551234): \n";
-    cin  >> newMemberPhoneNumber;
-    cout << "Enter the Member's Age: \n";
-    cin  >> newMemberAge;
-
-    if (arraySize > 1) //copy array operation from original array to temporary array then back to the original
+    if (arraySize < ARRAYMAX)
     {
-        //clearing the temp array and rebuilding so it can store the temporary elements
-        tempFirstNames   = NULL; tempFirstNames   = new string[arraySize];
-        tempLastNames    = NULL; tempLastNames    = new string[arraySize];
-        tempPhoneNumbers = NULL; tempPhoneNumbers = new string[arraySize];
-        tempAges         = NULL; tempAges         = new int[arraySize];
+        //variables needed to add data to the array
+        string newMemberFirstName;
+        string newMemberLastName;
+        string newMemberPhoneNumber;
+        int newMemberAge;
 
-        for(int i = 0; i < arraySize - 1; i++)
+        //getting the variables
+        cout << "Enter the Member's First name: \n";
+        cin  >> newMemberFirstName;
+        cout << "Enter the Member's Last name: \n";
+        cin  >> newMemberLastName;
+        cout << "Enter the Member's phone number as a single string of numbers, eg(8154551234): \n";
+        cin  >> newMemberPhoneNumber;
+        cout << "Enter the Member's Age: \n";
+        cin  >> newMemberAge;
+
+        if (arraySize > 1) //copy array operation from original array to temporary array then back to the original
         {
-            //copying into temporary array
-            *(tempFirstNames + i)   = firstNames[i];
-            *(tempLastNames + i)    = lastNames[i];
-            *(tempPhoneNumbers + i) = phoneNumbers[i];
-            *(tempAges + i)         = ages[i];
+            //clearing the temp array and rebuilding so it can store the temporary elements
+            tempFirstNames   = NULL; tempFirstNames   = new string[arraySize];
+            tempLastNames    = NULL; tempLastNames    = new string[arraySize];
+            tempPhoneNumbers = NULL; tempPhoneNumbers = new string[arraySize];
+            tempAges         = NULL; tempAges         = new int[arraySize];
+
+            for(int i = 0; i < arraySize - 1; i++)
+            {
+                //copying into temporary array
+                *(tempFirstNames + i)   = firstNames[i];
+                *(tempLastNames + i)    = lastNames[i];
+                *(tempPhoneNumbers + i) = phoneNumbers[i];
+                *(tempAges + i)         = ages[i];
+            }
+
+            /* this section of code would normally be how the original array is cleared and expanded, but it does not extend beyond the scope of this function
+            firstNames   = NULL; firstNames   = new string[arraySize];
+            lastNames    = NULL; lastNames    = new string[arraySize];
+            phoneNumbers = NULL; phoneNumbers = new string[arraySize];
+            ages         = NULL; ages         = new int[arraySize];
+            */
+
+            for(int i = 0; i < arraySize - 1; i++)
+            {
+                //copying into the true array
+                *(firstNames + i)       = tempFirstNames[i];
+                *(lastNames + i)        = tempLastNames[i];
+                *(phoneNumbers + i)     = tempPhoneNumbers[i];
+                *(ages + i)             = tempAges[i];
+            }
+
+            delete [] tempFirstNames;
+            delete [] tempLastNames;
+            delete [] tempPhoneNumbers;
+            delete [] tempAges;
         }
 
-        /* this section of code would normally be how the original array is cleared and expanded, but it does not extend beyond the scope of this function
-        firstNames   = NULL; firstNames   = new string[arraySize];
-        lastNames    = NULL; lastNames    = new string[arraySize];
-        phoneNumbers = NULL; phoneNumbers = new string[arraySize];
-        ages         = NULL; ages         = new int[arraySize];
-        */
+        //adding the data to the new array
+        *(firstNames + (arraySize - 1))   = newMemberFirstName;
+        *(lastNames + (arraySize - 1))    = newMemberLastName;
+        *(phoneNumbers + (arraySize - 1)) = newMemberPhoneNumber;
+        *(ages + (arraySize - 1))         = newMemberAge;
 
-        for(int i = 0; i < arraySize - 1; i++)
-        {
-            //copying into the true array
-            *(firstNames + i)       = tempFirstNames[i];
-            *(lastNames + i)        = tempLastNames[i];
-            *(phoneNumbers + i)     = tempPhoneNumbers[i];
-            *(ages + i)             = tempAges[i];
-        }
-
-        delete [] tempFirstNames;
-        delete [] tempLastNames;
-        delete [] tempPhoneNumbers;
-        delete [] tempAges;
-    }
-
-    //adding the data to the new array
-    *(firstNames + (arraySize - 1))   = newMemberFirstName;
-    *(lastNames + (arraySize - 1))    = newMemberLastName;
-    *(phoneNumbers + (arraySize - 1)) = newMemberPhoneNumber;
-    *(ages + (arraySize - 1))         = newMemberAge;
-
-    cout << "New Member Added.\n";
+        cout << "New Member Added.\n";
+    } else {cout << "You have added the maximum number of members and cannot include any more.\n";}
 }
 
 void displayFunction(string firstNames[], string lastNames[], string phoneNumbers[], int ages[])
@@ -195,38 +197,46 @@ void displayList(string firstNames[], string lastNames[], string phoneNumbers[],
     if(arraySize >= 1){
         for(int i = 0; i < arraySize; i++)
         {
-            cout << "first name: " << firstNames[i] << "\nlast name: " << lastNames[i] << "\nphone number: " << phoneNumbers[i] << "\nage: " << ages[i] << endl;
+            cout << "====================\n"
+                 << "Member #" << i + 1           << "\n"
+                 << "Name:  "  << lastNames[i]    << ", " << firstNames[i] << ".\n"
+                 << "Phone: "  << phoneNumbers[i] << "\n"
+                 << "Age:   "  << ages[i]         << endl
+                 << "====================\n";
         }
     } else {cout << "Nothing to display." << endl;}
 }
 
 void clearList(string firstNames[], string lastNames[], string phoneNumbers[], int ages[])
 {
-    char startOver;
-
-    cout << "Delete all entries and start over? y/n\n";
-    cin >> startOver;
-
-    while(startOver != 'y' && startOver != 'n' && startOver != 'Y' && startOver != 'N')
+    if(arraySize > 0)
     {
+        char startOver;
+
         cout << "Delete all entries and start over? y/n\n";
         cin >> startOver;
-    }
 
-    if (startOver == 'y' || startOver == 'Y')
-    {
-        cout << "Okay. Erasing array.\n";
-
-        for(int i = 0; i < ARRAYMAX; i++)
+        while(startOver != 'y' && startOver != 'n' && startOver != 'Y' && startOver != 'N')
         {
-            *(firstNames + i)   = "zzzz";
-            *(lastNames + i)    = "zzzz";
-            *(phoneNumbers + i) = "zzzz";
-            *(ages + i)         = 5555;
+            cout << "Delete all entries and start over? y/n\n";
+            cin >> startOver;
         }
 
-        arraySize = 0;
+        if (startOver == 'y' || startOver == 'Y')
+        {
+            cout << "Okay. Erasing array.\n";
 
-        cout << "Array erased." << endl;
-    }
+            for(int i = 0; i < ARRAYMAX; i++)
+            {
+                *(firstNames + i)   = "zzzz";
+                *(lastNames + i)    = "zzzz";
+                *(phoneNumbers + i) = "zzzz";
+                *(ages + i)         = 5555;
+            }
+
+            arraySize = 0;
+
+            cout << "Array erased." << endl;
+        }
+    } else {cout << "Nothing to erase.\n";}
 }
